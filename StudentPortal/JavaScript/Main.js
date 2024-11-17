@@ -12,7 +12,7 @@ setInterval(()=>{
 
 //FIRST PAGE
 setTimeout(()=>{
-    document.querySelector('.MCD_FP').style.display="none";
+    //document.querySelector('.MCD_FP').style.display="none";
 },5000)
 
 //CALA_page_B
