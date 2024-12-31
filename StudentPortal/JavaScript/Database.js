@@ -1,4 +1,3 @@
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 import { getDatabase,set,ref,remove,update,child,onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
@@ -42,29 +41,28 @@ let STUDENT_INFORMATION=[];
 
 
 
-onValue(ref(db,"EXAM_NUMBER"),(snapshot)=>{
+onValue(ref(db,"EXAM_NUMBER*"),(snapshot)=>{
     EXAM_NUMBER=[]
     EXAM_NUMBER.push(snapshot.val())
 })
 
-onValue(ref(db,"PASSWORD"),(snapshot)=>{
+onValue(ref(db,"PASSWORD*"),(snapshot)=>{
     PASSWORD=[]
     PASSWORD.push(snapshot.val())
 })
 
-onValue(ref(db,"SECTIONS_Q"),(snapshot)=>{
+onValue(ref(db,"SECTIONS_Q*"),(snapshot)=>{
     SECTIONS_Q=[]
     SECTIONS_Q.push(snapshot.val())
 })
-onValue(ref(db,"EXAMTIME"),(snapshot)=>{
+onValue(ref(db,"EXAMTIME*"),(snapshot)=>{
     EXAMTIME=[]
     EXAMTIME.push(snapshot.val())
 })
-onValue(ref(db,"STUDENT_INFORMATION"),(snapshot)=>{
+onValue(ref(db,"STUDENT_INFORMATION*"),(snapshot)=>{
     STUDENT_INFORMATION=[]
     STUDENT_INFORMATION.push(snapshot.val())
 })
-
 
 
 
@@ -884,13 +882,13 @@ setInterval(()=>{
 
                 if(STUDENT_DATA.length != 0 && STUDENT_DATA[0] != ""){
 
-                    update(ref(getDatabase(),`STUDENT_INFORMATION`),{
+                    update(ref(getDatabase(),`STUDENT_INFORMATION*`),{
                         STUDENT_INFORMATION:`${STUDENT_INFORMATION[0].STUDENT_INFORMATION}(/)`+`${localStorage.getItem("IN")}`+`(^)`+`${localStorage.getItem("IR")}`+`(^)`+`${localStorage.getItem("Correct_choice")}`+`(^)`+`${localStorage.getItem("VR_DB_HTML")}`
                     })
 
                 }else{
 
-                    set(ref(getDatabase(),`STUDENT_INFORMATION`),{
+                    set(ref(getDatabase(),`STUDENT_INFORMATION*`),{
                         STUDENT_INFORMATION:`${localStorage.getItem("IN")}`+`(^)`+`${localStorage.getItem("IR")}`+`(^)`+`${localStorage.getItem("Correct_choice")}`+`(^)`+`${localStorage.getItem("VR_DB_HTML")}`
                     })
                     
@@ -1021,19 +1019,19 @@ document.querySelector('.ADMIN_S_B').addEventListener("click",()=>{
     
     if(EXAM_NUMBER[0] != ""){
     /**/
-        update(ref(getDatabase(),"EXAM_NUMBER"),{
+        update(ref(getDatabase(),"EXAM_NUMBER*"),{
             EXAM_NUMBER:EXAM_NUMBER[0].EXAM_NUMBER+1
         }).then(()=>{
 
             //STUDENT_INFORMATION
             if(SECTIONS_Q.length != 0 && SECTIONS_Q[0].SECTIONS_Q != ""){
 
-                update(ref(getDatabase(),`STUDENT_INFORMATION`),{
+                update(ref(getDatabase(),`STUDENT_INFORMATION*`),{
                     STUDENT_INFORMATION:`${STUDENT_INFORMATION[0].STUDENT_INFORMATION}`+`(//)`
                 })
 
             }else{
-                set(ref(getDatabase(),`STUDENT_INFORMATION`),{
+                set(ref(getDatabase(),`STUDENT_INFORMATION*`),{
                     STUDENT_INFORMATION:`${STUDENT_INFORMATION[0].STUDENT_INFORMATION}`
                 })
             }
@@ -1043,7 +1041,7 @@ document.querySelector('.ADMIN_S_B').addEventListener("click",()=>{
             if(SECTIONS_Q.length != 0 && SECTIONS_Q[0].SECTIONS_Q != ""){
 
                 //SECTIONS_Q
-                update(ref(getDatabase(),`SECTIONS_Q`),{
+                update(ref(getDatabase(),`SECTIONS_Q*`),{
                     SECTIONS_Q:`${SECTIONS_Q[0].SECTIONS_Q}`+`(//)`+localStorage.getItem("ALL_Questions")
                 }).then(()=>{
 
@@ -1091,7 +1089,7 @@ document.querySelector('.ADMIN_S_B').addEventListener("click",()=>{
 
                 
             }else{
-                set(ref(getDatabase(),`SECTIONS_Q`),{
+                set(ref(getDatabase(),`SECTIONS_Q*`),{
                     SECTIONS_Q:localStorage.getItem("ALL_Questions")
                 }).then(()=>{
 
@@ -1141,11 +1139,11 @@ document.querySelector('.ADMIN_S_B').addEventListener("click",()=>{
 
             //SET EXAMTIME
             if(EXAMTIME.length != 0 && EXAMTIME[0].EXAMTIME != ""){
-                update(ref(getDatabase(),`EXAMTIME`),{
+                update(ref(getDatabase(),`EXAMTIME*`),{
                     EXAMTIME:`${EXAMTIME[0].EXAMTIME}`+`(/)`+`${localStorage.getItem("HOUR_I")}`+`(^)`+`${localStorage.getItem("MINUTE_I")}`+`(^)`+`${localStorage.getItem("SECOND_I")}`
                 })
             }else{
-                set(ref(getDatabase(),`EXAMTIME`),{
+                set(ref(getDatabase(),`EXAMTIME*`),{
                     EXAMTIME:`${localStorage.getItem("HOUR_I")}`+`(^)`+`${localStorage.getItem("MINUTE_I")}`+`(^)`+`${localStorage.getItem("SECOND_I")}`
                 })
             }
@@ -1459,7 +1457,7 @@ setInterval(()=>{
                 document.querySelector('.NP').style.outline="2px solid transparent";
 
 
-                update(ref(getDatabase(),`PASSWORD`),{
+                update(ref(getDatabase(),`PASSWORD*`),{
                     PASSWORD:`${document.querySelector('.NP').value}`
                 })
             }
@@ -1493,8 +1491,3 @@ setInterval(()=>{
     }
     
 },100)
-
-
-
-
-
